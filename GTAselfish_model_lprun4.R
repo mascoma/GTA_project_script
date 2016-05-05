@@ -12,9 +12,9 @@
 library(GillespieSSA)
 
 Gillespie.SSA <- function (lpfreq, time, tau,verbose, method) {
-  parms <- c(r=0.1, K=10^9, c=0.001, lp=lpfreq, n = 10^-8, b=100)
+  parms <- c(r=0.1, K=10^9, c=0.001, lp=lpfreq, g=0.1, i=0.001,re=0.001, n=200)
   x0 <- c(X1=9*10^6, X2=8.91*10^8)
-  a  <- c("r*(1-(X1+X2)/K)*X1*(1-c)", "c*X1","b*c*lp*n*X1*X2","r*(1-(X1+X2)/K)*X2")
+  a  <- c("r*(1-(X1+X2)/K)*X1*(1-c)", "c*X1","n*c*lp*g*i*re*X1*X2","r*(1-(X1+X2)/K)*X2")
   nu <- matrix (data=NA, nrow=2, ncol=4)
   nu[1,] <- c(1,-1,1,0)
   nu[2,] <- c(0,0,-1,1)
@@ -25,21 +25,22 @@ Gillespie.SSA <- function (lpfreq, time, tau,verbose, method) {
 }
 
 #ptm <- proc.time()
-#lpfreq1_out<-Gillespie.SSA(0.00004, 500000, 0.1, verbose=T, method="ETL")
+lpfreq4_out<-Gillespie.SSA(0.00005, 500000, 0.1, verbose=T, method="ETL")
 #proc.time() - ptm
-lpfreqs<-seq(0.00001, 0.01, 0.00002)
+#lpfreqs<-seq(0.00004, 0.0001, 0.00002)
 
-length(lpfreqs)
+#length(lpfreqs)
 
-output<-vector("list",length(lpfreqs))
-for (i in 1: length(lpfreqs)){
+#output<-vector("list",length(lpfreqs))
+#for (i in 1: length(lpfreqs)){
   
-  temp <- Gillespie.SSA(lpfreqs[i], 30000, 0.1, verbose=T, method="ETL")
-  output[[i]]<-temp
+#  temp <- Gillespie.SSA(lpfreqs[i], 500000, 0.1, verbose=T, method="ETL")
+#  output[[i]]<-temp
   
-}
+#}
 
-save.image("/isi/olga/xin/GTA_project/output/selfish_model/selfishmodel_newrun3.RData")
+save.image("neutralmodel_lprun4.RData")
+
 
 
 

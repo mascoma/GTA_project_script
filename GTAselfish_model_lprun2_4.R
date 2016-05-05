@@ -12,7 +12,7 @@
 library(GillespieSSA)
 
 Gillespie.SSA <- function (lpfreq, time, tau,verbose, method) {
-  parms <- c(r=0.1, K=10^9, c=0.001, lp=lpfreq, n = 10^-8, b=100)
+  parms <- c(r=0.1, K=10^9, c=0.001, lp=lpfreq, n = 2.5*10^-8, b=100)
   x0 <- c(X1=9*10^6, X2=8.91*10^8)
   a  <- c("r*(1-(X1+X2)/K)*X1*(1-c)", "c*X1","b*c*lp*n*X1*X2","r*(1-(X1+X2)/K)*X2")
   nu <- matrix (data=NA, nrow=2, ncol=4)
@@ -39,7 +39,7 @@ for (i in 1: length(lpfreqs)){
   
 }
 
-save.image("/isi/olga/xin/GTA_project/output/selfish_model/selfishmodel_newrun3.RData")
+save.image("/isi/olga/xin/GTA_project/output/selfish_model/selfishmodel_newrun2_4.RData")
 
 
 

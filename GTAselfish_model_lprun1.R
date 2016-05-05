@@ -34,13 +34,12 @@ length(lpfreqs)
 output<-vector("list",length(lpfreqs))
 for (i in 1: length(lpfreqs)){
   
-  temp <- Gillespie.SSA(lpfreqs[i], 500000, 0.1, verbose=T, method="ETL")
+  temp <- Gillespie.SSA(lpfreqs[i], 30000, 0.1, verbose=T, method="ETL")
   output[[i]]<-temp
   
 }
 
-save.image("neutralmodel_lprun1.RData")
-
+save.image("/isi/olga/xin/GTA_project/output/selfish_model/selfishmodel_newrun1.RData")
 
 
 
@@ -49,4 +48,4 @@ save.image("neutralmodel_lprun1.RData")
 #test1<-Gillespie.SSA(0.0007, 10000, 0.05, verbose=T)
 
 #proc.time() - ptm
-out<-Gillespie.SSA(1e-04, 500000, 0.1, verbose=T, method="ETL")
+#out<-Gillespie.SSA(1e-04, 500000, 0.1, verbose=T, method="ETL")

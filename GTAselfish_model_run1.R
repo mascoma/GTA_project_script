@@ -24,25 +24,22 @@ Gillespie.SSA <- function (lpfreq, time, tau,verbose, method) {
   return(out)
 }
 
-ptm <- proc.time()
-lpfreq1_out<-Gillespie.SSA(0.00004, 500000, 0.1, verbose=T, method="ETL")
-proc.time() - ptm
-#lpfreqs<-seq(0.00004, 0.0004, 0.00002)
+lpfreqs<-seq(0.00004, 0.0004, 0.00002)
 
-#length(lpfreqs)
+length(lpfreqs)
 
-#output<-vector("list",length(lpfreqs))
-#for (i in 1: length(lpfreqs)){
+output<-vector("list",length(lpfreqs))
+for (i in 1: length(lpfreqs)){
   
-#  temp <- Gillespie.SSA(lpfreqs[i], 500000, 0.1, verbose=T, method="ETL")
-#  output[[i]]<-temp
+  temp <- Gillespie.SSA(lpfreqs[i], 500000, 0.1, verbose=F, method="ETL")
+  output[[i]]<-temp
   
-#}
+}
 
 save.image("neutralmodel_run1.RData")
 
 
-
+#ptm <- proc.time()
 
 
 
