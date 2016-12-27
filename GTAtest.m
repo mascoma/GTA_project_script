@@ -6,5 +6,5 @@ plot(t,y(:,1),'-o',t,y(:,2),'-o');
 xlabel('Time t');
 ylabel('Population size');
 legend('X+(GTA positive)','X-(GTA negative)');
-%dlmwrite('/Users/Xin/Desktop/projects/GTA_project/output/20160627/matlabout.txt', y(657, 1:end));
-%dlmwrite('/isi/olga/xin/GTA_project/output/20160627/GTAoutput.txt', [t, y]);
+dlmwrite('/Users/Xin/Desktop/projects/GTA_project/output/20160627/matlabout.txt', y(657, 1:end));
+dlmwrite('/isi/olga/xin/GTA_project/output/20160627/GTAoutput.txt', [t, y]);

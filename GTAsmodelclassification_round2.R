@@ -2,7 +2,7 @@
 library(animation)
 library(deSolve)
 library(plot3D)
-source("/Users/Xin/Desktop/projects/GTA_project/bin/solveGTAeq.R")
+source("/isi/olga/xin/GTA_project/bin/solveGTAeq.R")
 
 args <- commandArgs(trailingOnly = TRUE)
 

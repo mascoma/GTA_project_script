@@ -1,7 +1,7 @@
-### if there are error or warnings from solver or any popluation size is negative, if so  return NA
+### if there are error or warnings from solver  if so  return NA
 
-error_check <- function(out, run.length){
-  if (is.na(out[run.length, 2]) || out[run.length, 2]<0 || out[run.length, 3]<0){
+na_check <- function(out, run.length){
+  if (is.na(out[run.length, 2])){
     return(1)
   }
   else {
@@ -9,7 +9,17 @@ error_check <- function(out, run.length){
   }
 }
 ###
+neg_check <- function(out, run.length){
+  if (out[run.length, 2]<0 || out[run.length, 3]<0){
+    return(1)
+  }
+  else {
+    return(0)
+  }
+}
 
+
+####
 solveGTAeq <- function(Pars) { 
   # to solve the ODE and return final poulation size, ratio of X+ 
   # the status of population (stable/unstable), and the function (oscillation or not)
@@ -24,15 +34,24 @@ solveGTAeq <- function(Pars) {
   }
   times <- seq(0, 10000, by = 1)
 
-  out <- ode(yini, times, GTAeq, Pars)
+  out <- ode(yini, times, GTAeq, Pars, method = "ode45")
   run.length <- length(out[, 1])
   
-  ## check if the population sizes are in reasonable values
-  e <- error_check(out, run.length)
+  ## check if the population sizes are na
+  e <- na_check(out, run.length)
   if (e){
     outputarray <- c(rep(NA, 5))
     return(outputarray)
   }
+  
+  ## check if the population sizes are negative
+  f <- neg_check(out, run.length)
+  if (f){
+    outputarray <- c(rep(-1, 5))
+    return(outputarray)
+  }
+  
+  
   
   ## determine if dynamic of population size is oscillation
   fun.status <- "l"
@@ -47,7 +66,7 @@ solveGTAeq <- function(Pars) {
       temp = temp + 1
     }
   }
-  if (temp > 3) {
+  if (temp > 5) {
     fun.status <- "o"
   }
   ###
@@ -71,14 +90,22 @@ solveGTAeq <- function(Pars) {
   }
   else {
     times <- seq(0, 100000, by = 1)
-    out <- ode(yini, times, GTAeq, Pars)
+    out <- ode(yini, times, GTAeq, Pars, method = "ode45")
     run.length <- length(out[, 1])
-    e <- error_check(out, run.length)
+    ## check if the population sizes are na
+    e <- na_check(out, run.length)
     if (e){
       outputarray <- c(rep(NA, 5))
       return(outputarray)
     }
     
+    ## check if the population sizes are negative
+    f <- neg_check(out, run.length)
+    if (f){
+      outputarray <- c(rep(-1, 5))
+      return(outputarray)
+    }
+
     ### determine if population is stable
     b <- 0
     for (a in 1:50){
@@ -97,11 +124,19 @@ solveGTAeq <- function(Pars) {
     }
     else {
       times <- seq(0, 1000000, by = 1)
-      out <- ode(yini, times, GTAeq, Pars)
+      out <- ode(yini, times, GTAeq, Pars, method = "ode45")
       run.length <- length(out[, 1])
-      e <- error_check(out, run.length)
+      ## check if the population sizes are na
+      e <- na_check(out, run.length)
       if (e){
         outputarray <- c(rep(NA, 5))
+        return(outputarray)
+      }
+      
+      ## check if the population sizes are negative
+      f <- neg_check(out, run.length)
+      if (f){
+        outputarray <- c(rep(-1, 5))
         return(outputarray)
       }
       
@@ -123,11 +158,19 @@ solveGTAeq <- function(Pars) {
       }
       else {
         times <- seq(0, 30000000, by = 1)
-        out <- ode(yini, times, GTAeq, Pars)
+        out <- ode(yini, times, GTAeq, Pars, method = "ode45")
         run.length <- length(out[, 1])
-        e <- error_check(out, run.length)
+        ## check if the population sizes are na
+        e <- na_check(out, run.length)
         if (e){
           outputarray <- c(rep(NA, 5))
+          return(outputarray)
+        }
+        
+        ## check if the population sizes are negative
+        f <- neg_check(out, run.length)
+        if (f){
+          outputarray <- c(rep(-1, 5))
           return(outputarray)
         }
         

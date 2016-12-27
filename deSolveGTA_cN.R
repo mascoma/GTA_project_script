@@ -22,9 +22,6 @@ solveGTAeq <- function(Pars) {
   times <- seq(0, 10000, by = 1)
   out <- ode(yini, times, GTAeq, pars)
   b = 0
-  if (is.na(out[length(times), 2])){
-    break
-  }
   for (a in 1:50){
 
     deltaX <- abs(out[length(times), 2]-out[(length(times)-a), 2]) 
@@ -42,9 +39,6 @@ solveGTAeq <- function(Pars) {
     times <- seq(0, 100000, by = 1)
     out <- ode(yini, times, GTAeq, pars)
     b = 0
-    if (is.na(out[length(times), 2])){
-      break
-    }
     for (a in 1:50){
       deltaX <- abs(out[length(times), 2]-out[(length(times)-a), 2]) 
       if (deltaX < 0.0001 && (out[length(times), 2] + out[length(times), 3]) > 1000) {
@@ -61,9 +55,6 @@ solveGTAeq <- function(Pars) {
       times <- seq(0, 1000000, by = 1)
       out <- ode(yini, times, GTAeq, pars)
       b = 0
-      if (is.na(out[length(times), 2])){
-        break
-      } 
       for (a in 1:50){
  
         deltaX <- abs(out[length(times), 2]-out[(length(times)-a), 2]) 
@@ -80,9 +71,6 @@ solveGTAeq <- function(Pars) {
       else {
         times <- seq(0, 30000000, by = 1)
         out <- ode(yini, times, GTAeq, pars)
-        if (is.na(out[length(times), 2])){
-          break
-        }
         output <- out[length(times),]
         X1.ratio <- output[2]/(output[2] + output[3])
         outputarray <- c(output[2], output[3], X1.ratio)

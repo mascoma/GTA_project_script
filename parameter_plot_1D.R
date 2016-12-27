@@ -28,6 +28,6 @@ N.array <- c(1e-10, 5e-10, seq(1e-9, 1.5e-9, length.out = 42),
 png("/Users/Xin/Desktop/projects/GTA_project/output/20160722/Nrange.png", 
     width = 1000, height = 200)
 par(mar=c(4, 4, 1, 1))
-plot(N.array, seq(1, 49, by = 1), xlab = "N", ylab = "index", pch = 20)
+plot(N.array, seq(1, 50, by = 1), xlab = "N", ylab = "index", pch = 20)
 dev.off()
 
